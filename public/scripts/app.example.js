@@ -1,37 +1,51 @@
-class App {
-  constructor() {
-    this.clearButton = document.getElementById("clear-btn");
-    this.loadButton = document.getElementById("load-btn");
-    this.carContainerElement = document.getElementById("cars-container");
-  }
+// Data dummy mobil yang tersedia nanti dipindah ke car.example.js
+const carsData = [
+  {
+      name: "Toyota Avanza",
+      price: 430000,
+      passengers: 4,
+      transmission: "Manual",
+      year: 2020,
+      image: "images/cars.png"
+  },
+  {
+      name: "Honda Jazz",
+      price: 500000,
+      passengers: 5,
+      transmission: "Automatic",
+      year: 2019,
+      image: "images/cars.png"
+  },
+];
 
-  async init() {
-    await this.load();
+// Fungsi untuk memuat mobil berdasarkan input pengguna
+function loadCars() {
+  const carsContainer = document.getElementById("cars-container");
+  const driverType = document.getElementById("tipeDriver").value;
+  const date = document.getElementById("tanggal").value;
+  const time = document.getElementById("waktuJemput").value;
+  const passengers = document.getElementById("jumlahPenumpang").value;
 
-    // Register click listener
-    this.clearButton.onclick = this.clear;
-    this.loadButton.onclick = this.run;
-  }
+  carsContainer.innerHTML = ""; // Kosongkan kontainer sebelum menampilkan hasil
 
-  run = () => {
-    Car.list.forEach((car) => {
-      const node = document.createElement("div");
-      node.innerHTML = car.render();
-      this.carContainerElement.appendChild(node);
-    });
-  };
+  // Filter data mobil berdasarkan input pengguna
+  const filteredCars = carsData.filter(car => car.passengers >= passengers);
 
-  async load() {
-    const cars = await Binar.listCars();
-    Car.init(cars);
-  }
-
-  clear = () => {
-    let child = this.carContainerElement.firstElementChild;
-
-    while (child) {
-      child.remove();
-      child = this.carContainerElement.firstElementChild;
-    }
-  };
+  // Menampilkan data mobil yang sudah difilter
+  filteredCars.forEach(car => {
+      const carElement = `
+          <div class="col-lg-4">
+              <div class="card px-2 py-4">
+                  <img src="${car.image}" class="card-img-top mt-4 text-center">
+                  <div class="card-body">
+                      <h5 class="card-title fs-6">${car.name}</h5>
+                      <h5 class="card-title fs-5 fw-bold">Rp ${car.price} / hari</h5>
+                      <p class="cars__p">Mobil ${car.transmission}, kapasitas ${car.passengers} orang, Tahun ${car.year}</p>
+                      <a href="#" class="btn btn-utama" style="width:100%">Pilih Mobil</a>
+                  </div>
+              </div>
+          </div>
+      `;
+      carsContainer.insertAdjacentHTML("beforeend", carElement);
+  });
 }

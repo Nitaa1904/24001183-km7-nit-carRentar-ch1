@@ -1,43 +1,35 @@
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+document.getElementById("load-btn").addEventListener("click", function() {
+  const tipeDriver = document.getElementById("tipeDriver").value;
+  const tanggal = document.getElementById("tanggal").value;
+  const waktuJemput = document.getElementById("waktuJemput").value;
+  const jumlahPenumpang = document.getElementById("jumlahPenumpang").value;
 
-class Binar {
-  static populateCars = (cars) => {
-    return cars.map((car) => {
-      const isPositive = getRandomInt(0, 1) === 1;
-      const timeAt = new Date();
-      const mutator = getRandomInt(1000000, 100000000);
-      const availableAt = new Date(timeAt.getTime() + (isPositive ? mutator : -1 * mutator))
+  // Filter mobil berdasarkan input pengguna
+  const filteredCars = cars.filter(car => {
+    return (
+      car.driverType === tipeDriver &&
+      car.date === tanggal &&
+      car.time === waktuJemput &&
+      car.capacity >= jumlahPenumpang
+    );
+  });
 
-      return {
-        ...car,
-        availableAt,
-      };
-    })
+  // Tampilkan hasil pencarian
+  const hasilPencarianDiv = document.getElementById("hasilPencarian");
+  hasilPencarianDiv.innerHTML = ""; // Kosongkan hasil sebelumnya
+
+  if (filteredCars.length === 0) {
+    hasilPencarianDiv.innerHTML = "<p>Tidak ada mobil yang sesuai dengan kriteria Anda.</p>";
+  } else {
+    filteredCars.forEach(car => {
+      hasilPencarianDiv.innerHTML += `
+        <div class="car-item">
+          <img src="${car.image}" alt="${car.name}">
+          <h3>${car.name}</h3>
+          <p>Tipe Driver: ${car.driverType}</p>
+          <p>Kapasitas: ${car.capacity} penumpang</p>
+        </div>
+      `;
+    });
   }
-
-  static async listCars(filterer) {
-    let cars;
-    let cachedCarsString = localStorage.getItem("CARS");
-
-    if (!!cachedCarsString) {
-      const cacheCars = JSON.parse(cachedCarsString);
-      cars = this.populateCars(cacheCars);
-    } else {
-      const response = await fetch(
-        "https://raw.githubusercontent.com/fnurhidayat/probable-garbanzo/main/data/cars.min.json"
-      );
-      const body = await response.json();
-      cars = this.populateCars(body)
-
-      localStorage.setItem("CARS", JSON.stringify(cars));
-    }
-
-    if (filterer instanceof Function) return cars.filter(filterer);
-
-    return cars;
-  }
-}
+});
