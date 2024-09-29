@@ -9,7 +9,7 @@ const carsData = [
       driverType: "true", // With Driver
       passengers: 4,
       price: 500000,
-      image: "images/cars.png",
+      image: "images/car01.min.jpg",
       options: [
         "Cruise Control",
         "Tinted Glass",
@@ -30,7 +30,7 @@ const carsData = [
       driverType: "false", // Without Driver
       passengers: 5,
       price: 600000,
-      image: "images/cars.png",
+      image: "images/car02.min.jpg",
       options: [
         "Keyless Entry",
         "Power Windows"
@@ -50,7 +50,7 @@ const carsData = [
       driverType: "true", // With Driver
       passengers: 3,
       price: 550000,
-      image: "images/cars.png",
+      image: "images/car03.min.jpg",
       options: [
         "Bucket Seats",
         "Airbag: Passenger"
