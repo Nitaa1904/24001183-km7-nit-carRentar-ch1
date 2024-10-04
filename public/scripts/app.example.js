@@ -6,7 +6,7 @@ const carsData = [
       manufacture: "Ford",
       model: "F150",
       year: 2022,
-      driverType: "true", // With Driver
+      driverType: "true", 
       passengers: 4,
       price: 500000,
       image: "images/car01.min.jpg",
@@ -27,7 +27,7 @@ const carsData = [
       manufacture: "BMW",
       model: "X5",
       year: 2019,
-      driverType: "false", // Without Driver
+      driverType: "false", 
       passengers: 5,
       price: 600000,
       image: "images/car02.min.jpg",
@@ -47,7 +47,7 @@ const carsData = [
       manufacture: "Lincoln",
       model: "MKZ",
       year: 2021,
-      driverType: "true", // With Driver
+      driverType: "true", 
       passengers: 3,
       price: 550000,
       image: "images/car03.min.jpg",

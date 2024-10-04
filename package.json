@@ -1,0 +1,31 @@
+{
+  "name": "carrental",
+  "version": "1.0.0",
+  "description": "challange-03",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon server/index.js",
+    "test": "server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitaa1904/24001183-km7-nit-carRentar-ch2.git"
+  },
+  "keywords": [
+    "carRentar"
+  ],
+  "author": "nita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nitaa1904/24001183-km7-nit-carRentar-ch2/issues"
+  },
+  "homepage": "https://github.com/Nitaa1904/24001183-km7-nit-carRentar-ch2#readme",
+  "dependencies": {
+    "express": "^4.21.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
